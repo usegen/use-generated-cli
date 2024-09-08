@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator nestgraphql {
+  provider           = "node node_modules/prisma-nestjs-graphql"
+  noAtomicOperations = "true"
+  reExport           = "Directories"
+  output             = "../src/@generated"
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
+  passwordHash String?    @unique
+  resetToken   String?    @unique
+  roles        UserRole[]
+  posts        Post[]
+  comments     Comment[]
+}
+
+enum UserRole {
+  SuperAdmin
+  Admin
+  AuthenticatedUser
+}
+
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean
+  author    User?     @relation(fields: [authorId], references: [id])
+  authorId  Int?
+  coments   Comment[]
+}
+
+model Comment {
+  id       Int    @id @default(autoincrement())
+  content  String
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId Int
+  post     Post   @relation(fields: [postId], references: [id])
+  postId   Int
+}
+

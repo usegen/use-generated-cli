@@ -1,0 +1,46 @@
+{  
+  "defaultRequireLogin": true, 
+  "createAuthModule":true,
+  "defaultQueryDepthLevel":2,
+  "modules": [
+    {
+      "name": "user",
+      "models": [
+        {
+          "name": "User",
+          "queryDepthLevel":1,
+          "crud": {
+            "resolverTemplate": "templates/resolver1.hbs",
+            "serviceTemplate": "templates/service1.hbs"
+          },
+          "requireLogin":true,   
+          "requiredRoles":["Admin"]
+        }
+      ]
+    },
+    {
+      "name": "post",
+      "models": [
+        {
+          "queryDepthLevel":2,
+          "name": "Post", 
+          "requiredRoles":{
+            "findAll":["Admin"],
+            "createItem":["SuperAdmin"]
+          } 
+        },
+        {
+          "name": "Comment",
+          "queryDepthLevel":2,
+          "requireLogin": [        
+            "findAll",
+            "create"
+          ]
+        } 
+      ]
+    }
+  ],
+  "createPrismaModule": true,
+  "createCommonTypes":true,
+  "createMailTemplates":true
+}

@@ -1,0 +1,26 @@
+
+import {  
+  createUnionType, ObjectType, PartialType, Field
+} from '@nestjs/graphql';
+
+import {
+  _modelname_(pascalCase) as Initial_modelname_(pascalCase),
+} from 'src/@generated/_modelname_(kebabCase)';
+import { ListMetadata } from 'src/custom-types/list-metadata';
+
+_(relations__imports_here)_
+
+
+
+@ObjectType()
+export class Extended_modelname_(pascalCase) extends Initial_modelname_(pascalCase) {
+  
+  _(relations_here)_
+
+  _(computedProps)_
+}
+
+export const _modelname_(pascalCase)OrList = createUnionType({
+  name: '_modelname_(pascalCase)OrList',
+  types: () => [ListMetadata, Extended_modelname_(pascalCase)],
+});

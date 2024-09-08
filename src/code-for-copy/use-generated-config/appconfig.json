@@ -1,0 +1,11 @@
+{  
+  "defaultRequireLogin": true, 
+  "createAuthModule":true,
+  "defaultQueryDepthLevel":2,
+  "modules": [
+   
+  ],
+  "createPrismaModule": true,
+  "createCommonTypes":true,
+  "createMailTemplates":true
+}

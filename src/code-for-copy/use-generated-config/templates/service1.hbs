@@ -1,0 +1,57 @@
+import { Injectable } from '@nestjs/common'
+import { PrismaService } from 'src/prisma/prisma.service';
+import { convertPageAndPerPageToTakeAndSkip } from 'src/generated-utils/service';
+import { applyComputetdPropsIteratively } from "src/computed-props/apply-computed-props";
+
+
+const getInclude = () => {}
+
+@Injectable()
+export class _modelname_(pascalCase)GeneratedService {
+  constructor(public readonly prisma: PrismaService){}
+
+  all_modelname_(pascalCase)s (take, skip, orderBy, where,nestedArgs){
+    const includeProp: any = !!Object.keys(getInclude(nestedArgs)).length
+    ? {
+      include: getInclude(nestedArgs)
+    }
+    : {}
+    return this.prisma._modelname_(camelCase).findMany({
+      take,
+      skip,
+      orderBy,
+      where,
+      ...includeProp
+    }).then(results =>{
+      return applyComputetdPropsIteratively(results,"_modelname_(pascalCase)", this.prisma)
+    });
+  }
+  findOne_modelname_(pascalCase) = (id,nestedArgs) => {
+    const includeProp: any = !!Object.keys(getInclude(nestedArgs)).length
+    ? {
+      include: getInclude(nestedArgs)
+    }
+    : {}
+
+    return this.prisma._modelname_(camelCase).findUnique(
+      {
+        where: { id },
+        ...includeProp
+    }).then(result =>{
+      return applyComputetdPropsIteratively([result],"_modelname_(pascalCase)", this.prisma)[0] || result
+    });;
+  }
+  delete_modelname_(pascalCase) = (id) => {
+    return this.prisma._modelname_(camelCase).delete(
+      {
+        where: { id }
+    });
+  }
+  update_modelname_(pascalCase)  =(id,input)=>{
+    return this.prisma._modelname_(camelCase).update({where: { id }, data:input});
+  }
+  create_modelname_(pascalCase)  =(input)=>{
+    return this.prisma._modelname_(camelCase).create({data:input});
+  }
+  
+}

@@ -1,0 +1,44 @@
+{
+	"name": "use-generated",
+	"description": "Use 'init' arg for initial setup or 'api' to regenerate the API after models or appconfig.json has changed",
+	"version": "0.0.1",
+	"license": "MIT",
+	"bin": {
+		"use-generated": "index.js"
+	},
+	"author": {
+		"name": "usegenerated",
+		"email": "hi@usegenerated.com",
+		"url": "usegenerated.com"
+	},
+	"keywords": [
+		"use-generated",
+		"usegenerated"
+	],
+	"files": [
+		"index.js",
+		"utils"
+	],
+	"scripts": {
+		"format": "prettier --write \"./**/*.{js,json}\""
+	},
+	"dependencies": {
+		"chalk": "^4.1.2", 
+		"cli-alerts": "1.2.2",
+		"cli-handle-error": "4.4.0",
+		"cli-handle-unhandled": "1.1.1",
+		"cli-meow-help": "3.1.0",
+		"cli-welcome": "2.2.2",
+		"fs-extra": "11.1.0",
+		"generate-template-files": "^3.2.1",
+		"meow": "^9.0.0",
+		"pluralize": "^8.0.0"
+	},
+	"resolutions": {
+  "wrap-ansi": "7.0.0",
+  "string-width": "4.1.0"
+},
+	"devDependencies": {
+		"prettier": "^2.8.4"
+	}
+}

@@ -1,0 +1,16 @@
+import { Injectable } from '@nestjs/common';
+import { _modelname_(pascalCase)GeneratedService } from './generated/_modelname_(kebabCase).generated-service';
+
+@Injectable()
+export class _modelname_(pascalCase)Service extends _modelname_(pascalCase)GeneratedService {
+  // this overrides the all_modelname_(pascalCase) from the  _modelname_(pascalCase)GeneratedService and hardcodes the property take to 2
+  // that means all_modelname_(pascalCase) will only return first 2 elements
+  // all_modelname_(pascalCase) (take, skip, orderBy, where){
+  //   return this.prisma._modelname_(kebabCase).findMany({
+  //     take:2,
+  //     skip,
+  //     orderBy,
+  //     where
+  //   });
+  // }
+}

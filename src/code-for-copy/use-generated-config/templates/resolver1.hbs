@@ -1,0 +1,84 @@
+import { Resolver, Query, Mutation, Args, Int, createUnionType, ObjectType} from '@nestjs/graphql';
+
+import { _modelname_(pascalCase), _modelname_(pascalCase)UpdateInput, _modelname_(pascalCase)CreateInput, _modelname_(pascalCase)OrderByWithRelationInput, _modelname_(pascalCase)WhereInput } from 'src/@generated/_modelname_(kebabCase)';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { _modelname_(pascalCase)NestedArgsStartPoint } from './_modelname_(kebabCase).nested-args-types';
+import { _modelname_(pascalCase)OrList, Extended_modelname_(pascalCase) } from './_modelname_(kebabCase).custom-types';
+import { _modelname_(pascalCase)Service } from '../_modelname_(kebabCase).service';
+
+import {UseGuards} from '@nestjs/common'
+import { ListMetadata } from 'src/custom-types/list-metadata';
+
+import { Roles } from '../../../auth/decorators/roles.decorator';
+import { RolesGuard } from '../../../auth/guards/roles.guard';
+import { GqlAuthGuard } from 'src/auth/guards/gql-login.guard';
+
+
+@Resolver(() => _modelname_(pascalCase)OrList)
+__model_authPlaceholder__
+export class _modelname_(pascalCase)GeneratedResolver {
+  constructor(
+    protected readonly prisma: PrismaService,
+    protected readonly _modelname_(camelCase)Service: _modelname_(pascalCase)Service
+    ) {}
+
+  @Query(() => [Extended_modelname_(pascalCase)], { name: 'all_modelname_(pascalCase)s' })
+  __findAll_authPlaceholder__
+  findAll(
+    @Args({name:'page', nullable: true, defaultValue: 1}) page: number,
+    @Args({name:'perPage', nullable: true, defaultValue: 10}) perPage: number,
+    @Args({name:'orderBy', nullable: true, type: () => [_modelname_(pascalCase)OrderByWithRelationInput] }) orderBy: _modelname_(pascalCase)OrderByWithRelationInput[],
+    @Args({name:'where', nullable: true}) where: _modelname_(pascalCase)WhereInput,
+    @Args({name:'nestedArgs', nullable: true}) nestedArgs: _modelname_(pascalCase)NestedArgsStartPoint
+  ) {
+    const skip =(page - 1) * perPage;
+    return this._modelname_(camelCase)Service.all_modelname_(pascalCase)s(
+      perPage,
+      skip,
+      orderBy,
+      where,
+      nestedArgs
+    );
+  }
+
+  @Query(() => ListMetadata, { name: '_all_modelname_(pascalCase)sMeta' })
+  __countAll_authPlaceholder__
+  async countAll(
+    @Args({name:'orderBy', nullable: true, type: () => [_modelname_(pascalCase)OrderByWithRelationInput] }) orderBy: _modelname_(pascalCase)OrderByWithRelationInput[],
+    @Args({name:'where', nullable: true}) where: _modelname_(pascalCase)WhereInput,
+  ) {
+
+    const count = await this.prisma._modelname_(camelCase).count({
+      orderBy,
+      where   
+    });
+    return {count};
+  }
+  @Query(() => Extended_modelname_(pascalCase), { name: '_modelname_(pascalCase)' })
+  __findOne_authPlaceholder__
+  findOne(
+    @Args('id', { type: () => Int }) id: number,
+    @Args({name:'nestedArgs', nullable: true}) nestedArgs: _modelname_(pascalCase)NestedArgsStartPoint) {
+    return this._modelname_(camelCase)Service.findOne_modelname_(pascalCase)(id,nestedArgs);
+  }
+
+  @Mutation(() => _modelname_(pascalCase))
+  __create_authPlaceholder__
+  create_modelname_(pascalCase)(@Args('createInput') input: _modelname_(pascalCase)CreateInput ) {
+    return this._modelname_(camelCase)Service.create_modelname_(pascalCase)(input)
+  }
+
+  @Mutation(() => _modelname_(pascalCase))
+  __update_authPlaceholder__
+  update_modelname_(pascalCase)(@Args('id', { type: () => Int }) id: number, @Args('updateInput') input: _modelname_(pascalCase)UpdateInput) {
+    return this._modelname_(camelCase)Service.update_modelname_(pascalCase)(id,input)
+  }
+
+  @Mutation(() => _modelname_(pascalCase))
+  __delete_authPlaceholder__
+  delete_modelname_(pascalCase)(@Args('id', { type: () => Int }) id: number) {
+    return this._modelname_(camelCase)Service.delete_modelname_(pascalCase)(id);
+  }
+
+
+}
