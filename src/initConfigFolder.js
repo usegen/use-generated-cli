@@ -29,6 +29,11 @@ function initConfigFolder() {
     "./src/app.module.ts",
     initialAppModuleContents,
     { flag: 'w' });
+  const initialAppServiceContents = fs.readFileSync(path.join(__dirname,'./code-for-copy/app.service.ts')).toString();
+  fs.writeFileSync(
+    "./src/app.service.ts",
+    initialAppServiceContents,
+    { flag: 'w' });
 
 }
 

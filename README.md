@@ -1,13 +1,10 @@
 # Getting started - Initial setup
 
-#### 1. Create a NestJs App `npm i -g @nestjs/cli` and `nest new project-name`, 
+#### 1. Create a NestJs App `npm i use-generated-cli` and `npx use-generated new project_name`, 
 
-#### 2.replace the contents of  `package.json` with the contents of `package_sample_for_project_root.json` that is provided here.
+#### 2. Install dependencies: `cd project_name` and `npm i`.
 
-
-#### 3. Add the `use-generated-cli` folder at the same level as the NestJs app and run `yarn` or `npm install` 
-
-#### 4. Run `yarn use-generated init`
+#### 3. Add the .env file to include DATABASE_URL and if the auth module is included add SALT, JWT_SECRET
 
 # Developing workflow
 
@@ -16,7 +13,7 @@
 Please make sure you have a postgres database created and it matches `.env` config for more info please consult Prisma docs[https://pris.ly/d/prisma-schema#accessing-environment-variables-from-the-schema]).
 
 
-#### 2. Create and apply prisma migrations `yarn prisma migrate dev`. 
+#### 2. Create and apply prisma migrations `npx prisma migrate dev`. 
 
 This will also regenerate prisma client and the NestJs GraphQL types in the `src/@generated` folder based on the generator.
 
@@ -25,11 +22,13 @@ This will also regenerate prisma client and the NestJs GraphQL types in the `src
 
 You could use the config from `use-generated-config/appconfig_example.json` along with copying the contents of `use-generated-config/schema.prisma__example` to `prisma/schema.prisma` as a working starting point. Also if auth module is used make sure you have `SALT` and `JWT_SECRET` in `.env` defined  as per `.env__example`
 
+Optionally, run `npx use-generated generate config` to generate a starting point in your appconfig.json
 
-### 4. Run `yarn use-generated api` to generate the api  
+
+### 4. Run `npx use-generated api` to generate the api  
 
 
-### 5. Run `yarn start:dev` to start the development server
+### 5. Run `npm run start:dev` to start the development server
 
 
 

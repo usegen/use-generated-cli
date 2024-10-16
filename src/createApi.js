@@ -3,7 +3,7 @@ const { execSync } = require('child_process');
 const { StringUtility } = require("generate-template-files");
 const path = require('path');
 const pluralize = require('pluralize')
-const { computedPropsDefs } = require('../../../src/computed-props/computed-props-defs.js');
+const { computedPropsDefs } = require(process.cwd()+'/src/computed-props/computed-props-defs.js');
 
 const removeDuplicatesByModelName = (accum, current) => {
   const listOfModelNames = accum.map(relation => relation?.modelName)
@@ -564,15 +564,41 @@ function generateModule(module) {
 
 }
 
+function removeDuplicateImports(filePath) {
+  try {
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    const lines = fileContent.split('\n');
+    const uniqueImports = new Set();
+    const result = [];
+    for (let line of lines) {
+      if (line.startsWith('import')) {
+        if (!uniqueImports.has(line.trim())) {
+          uniqueImports.add(line.trim());
+          result.push(line);
+        }
+      } else {
+        result.push(line);
+      }
+    }
+    const cleanedContent = result.join('\n');
+    fs.writeFileSync(filePath, cleanedContent, 'utf-8');
+    console.log(`Duplicates removed and file saved: ${filePath}`);
+  } catch (error) {
+    console.error('Error while processing the file:', error);
+  }
+}
 
 function createApi() {
   const filePath = path.join(__dirname, './generateRelationsFromModels.js');
-  execSync(`node ${filePath}`)
+  execSync(`node "${filePath}"`)
   const config = JSON.parse(fs.readFileSync("./use-generated-config/appconfig.json", 'utf8'))
 
   addOptionalModules(config);
 
   for (const module of config.modules) {
+    if(fs.existsSync(`./src/${module.name}/${module.name}.module.ts`)){
+      fs.unlinkSync(`./src/${module.name}/${module.name}.module.ts`)
+    }
     execSync(`nest g mo ${module.name} `)
     generateModule(module)
     for (const model of module.models) {
@@ -581,6 +607,7 @@ function createApi() {
       generateNonEditableFiles(module, model, config)
     }
   }
+  removeDuplicateImports('./src/app.module.ts');
 }
 
 createApi()

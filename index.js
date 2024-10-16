@@ -23,6 +23,7 @@ const path = require('path');
 	let isInit = input[0] ==='init'
 	const isGenerating = input[0] ==='api'
 	const isCreate = input[0] ==='new'
+	const isGenerateConfig = input[0] ==='generate'
 	if (isCreate) {
 		const projectName = input[1];
         if (!projectName) {
@@ -49,6 +50,10 @@ const path = require('path');
         } catch (error) {
             console.error('Error executing command:', error.message);
         }
+	}
+	if(isGenerateConfig){
+		const filePath = path.join(__dirname, './src/generateAppconfigFromRelations.js');
+		execSync(`node "${filePath}"`)
 	}
 	if (isInit) {
 		const filePath = path.join(__dirname, './src/initConfigFolder.js');
